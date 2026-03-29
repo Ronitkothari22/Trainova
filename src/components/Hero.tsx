@@ -1,12 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Users, BarChart3, Zap, Trophy } from 'lucide-react';
+import { ArrowRight, Users, BarChart3 } from 'lucide-react';
 
-const stats = [
-  { icon: Users, value: '50K+', label: 'Active Learners' },
-  { icon: BarChart3, value: '94%', label: 'Completion Rate' },
-  { icon: Zap, value: '3×', label: 'Faster Onboarding' },
-  { icon: Trophy, value: '200+', label: 'Organisations' },
+const highlights = [
+  {
+    icon: Users,
+    text: 'Built for real training teams and live learning environments',
+  },
+  {
+    icon: BarChart3,
+    text: 'Designed to improve engagement and track learning outcomes',
+  },
 ];
 
 const floatVariants = {
@@ -47,7 +51,7 @@ export default function Hero({ onBookDemo }: HeroProps) {
           </h1>
 
           <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            A session-driven corporate LMS that blends structured learning with real-time engagement. Run quizzes, live polls, and team activities from a single platform.
+            A session-driven corporate LMS that combines structured learning with real-time engagement. Run quizzes, live polls, and team activities from a single platform.
           </p>
 
           <motion.button
@@ -66,24 +70,25 @@ export default function Hero({ onBookDemo }: HeroProps) {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.25 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+          className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
         >
-          {stats.map(({ icon: Icon, value, label }, i) => (
+          {highlights.map(({ icon: Icon, text }, i) => (
             <motion.div
               key={i}
               variants={floatVariants}
               animate="animate"
               style={{ animationDelay: `${i * 0.4}s` }}
               transition={{ delay: i * 0.4 }}
-              className="relative rounded-2xl bg-white/70 backdrop-blur-lg border border-white/60 shadow-lg p-6 flex flex-col items-center gap-3 overflow-hidden group hover:shadow-indigo-100 hover:shadow-xl transition-shadow"
+              className="relative rounded-2xl bg-white/70 backdrop-blur-lg border border-white/60 shadow-lg p-6 flex flex-col items-center gap-3 overflow-hidden group hover:shadow-indigo-100 hover:shadow-xl transition-shadow text-center"
             >
               {/* Gradient blob behind card */}
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/60 to-violet-50/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
               <div className="relative w-11 h-11 rounded-xl bg-indigo-50 flex items-center justify-center ring-1 ring-indigo-100">
                 <Icon className="w-5 h-5 text-indigo-600" />
               </div>
-              <div className="relative text-3xl font-extrabold text-slate-900">{value}</div>
-              <div className="relative text-sm text-slate-500 font-medium">{label}</div>
+              <p className="relative text-sm md:text-base text-slate-700 font-medium leading-relaxed max-w-sm">
+                {text}
+              </p>
             </motion.div>
           ))}
         </motion.div>

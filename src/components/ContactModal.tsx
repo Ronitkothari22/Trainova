@@ -1,20 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
-import emailjs from '@emailjs/browser';
-
-// ─────────────────────────────────────────────────────────────────────────────
-// EmailJS Configuration
-// 1. Sign up at https://www.emailjs.com and create a free account
-// 2. Create an Email Service (Gmail, Outlook, etc.) and note the Service ID
-// 3. Create an Email Template and note the Template ID
-//    Template variables expected: {{from_name}}, {{from_email}}, {{message}}
-// 4. Get your Public Key from Account > API Keys
-// 5. Replace the placeholders below with your actual values
-// ─────────────────────────────────────────────────────────────────────────────
-const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz456'
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';   // e.g. 'AbCdEfGhIjKlMnOp'
+const contactApiBase = (import.meta.env.VITE_CONTACT_API_URL ?? '').replace(/\/$/, '');
 
 interface ContactModalProps {
     isOpen: boolean;
@@ -57,20 +44,25 @@ export default function ContactModal({ isOpen, onClose, mode = 'demo' }: Contact
         e.preventDefault();
         setStatus('sending');
         try {
-            await emailjs.send(
-                EMAILJS_SERVICE_ID,
-                EMAILJS_TEMPLATE_ID,
-                {
-                    from_name: form.name,
-                    from_email: form.email,
-                    message: form.query,
-                    subject: mode === 'demo' ? 'New Demo Request — Trainova' : 'Pricing Inquiry — Trainova',
-                },
-                EMAILJS_PUBLIC_KEY
-            );
+            const res = await fetch(`${contactApiBase}/api/contact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: form.name,
+                    email: form.email,
+                    query: form.query,
+                    mode,
+                }),
+            });
+            const data = (await res.json().catch(() => ({}))) as { error?: string };
+            if (!res.ok) {
+                console.error('Contact API:', data.error ?? res.statusText);
+                setStatus('error');
+                return;
+            }
             setStatus('success');
         } catch (err) {
-            console.error('EmailJS error:', err);
+            console.error('Contact request failed:', err);
             setStatus('error');
         }
     };

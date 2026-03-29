@@ -1,4 +1,4 @@
-import { Globe, Mail, MessageSquare } from 'lucide-react';
+
 
 export default function Footer() {
   return (
@@ -13,11 +13,14 @@ export default function Footer() {
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
               A session-driven corporate LMS that blends structured learning with real-time engagement.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Globe className="w-5 h-5" /></a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><MessageSquare className="w-5 h-5" /></a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Mail className="w-5 h-5" /></a>
-            </div>
+            {/* <div className="flex gap-4">
+              <a href="#" className="text-slate-400 hover:text-white transition-colors" aria-label="Contact">
+                <MessageSquare className="w-5 h-5" />
+              </a>
+              <a href="#" className="text-slate-400 hover:text-white transition-colors" aria-label="Email">
+                <Mail className="w-5 h-5" />
+              </a>
+            </div> */}
           </div>
         </div>
 
