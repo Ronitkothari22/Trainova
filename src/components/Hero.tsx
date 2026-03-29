@@ -1,8 +1,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Play, Users, BarChart, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Users, BarChart3 } from 'lucide-react';
 
-export default function Hero() {
+const highlights = [
+  {
+    icon: Users,
+    text: 'Built for real training teams and live learning environments',
+  },
+  {
+    icon: BarChart3,
+    text: 'Designed to improve engagement and track learning outcomes',
+  },
+];
+
+const floatVariants = {
+  animate: {
+    y: [0, -14, 0],
+    transition: { duration: 6, repeat: Infinity, ease: 'easeInOut' },
+  },
+};
+
+interface HeroProps {
+  onBookDemo: () => void;
+}
+
+export default function Hero({ onBookDemo }: HeroProps) {
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
       {/* Background Gradients */}
@@ -22,93 +44,53 @@ export default function Hero() {
             <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse" />
             The New Standard for Corporate Learning
           </span>
+
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight mb-8 leading-tight">
             Train Teams with Structure. <br className="hidden md:block" />
             <span className="text-gradient">Engage with Impact.</span>
           </h1>
+
           <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            A session-driven corporate LMS that blends structured learning with real-time engagement. Run quizzes, live polls, and team activities from a single platform.
+            A session-driven corporate LMS that combines structured learning with real-time engagement. Run quizzes, live polls, and team activities from a single platform.
           </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-indigo-600 text-white font-semibold text-lg hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 flex items-center justify-center gap-2 group">
-              Start Free Trial
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-slate-700 font-semibold text-lg hover:bg-slate-50 transition-all border border-slate-200 shadow-sm flex items-center justify-center gap-2">
-              <Play className="w-5 h-5 text-indigo-600" />
-              Watch Demo
-            </button>
-          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={onBookDemo}
+            className="px-8 py-4 rounded-full bg-indigo-600 text-white font-semibold text-lg hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 inline-flex items-center gap-2 group"
+          >
+            Book a Demo
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </motion.button>
         </motion.div>
 
-        {/* Browser Mockup */}
+        {/* Stats grid */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-16 relative max-w-5xl mx-auto"
+          transition={{ duration: 0.8, delay: 0.25 }}
+          className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
         >
-          <div className="rounded-2xl border border-slate-200/60 bg-white/50 backdrop-blur-xl shadow-2xl overflow-hidden">
-            {/* Browser Header */}
-            <div className="h-12 bg-slate-100/80 border-b border-slate-200/60 flex items-center px-4 gap-2">
-              <div className="w-3 h-3 rounded-full bg-rose-400" />
-              <div className="w-3 h-3 rounded-full bg-amber-400" />
-              <div className="w-3 h-3 rounded-full bg-emerald-400" />
-              <div className="mx-auto bg-white px-4 py-1 rounded-md text-xs text-slate-400 font-medium border border-slate-200 shadow-sm flex items-center gap-2">
-                app.trainova.com
+          {highlights.map(({ icon: Icon, text }, i) => (
+            <motion.div
+              key={i}
+              variants={floatVariants}
+              animate="animate"
+              style={{ animationDelay: `${i * 0.4}s` }}
+              transition={{ delay: i * 0.4 }}
+              className="relative rounded-2xl bg-white/70 backdrop-blur-lg border border-white/60 shadow-lg p-6 flex flex-col items-center gap-3 overflow-hidden group hover:shadow-indigo-100 hover:shadow-xl transition-shadow text-center"
+            >
+              {/* Gradient blob behind card */}
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/60 to-violet-50/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
+              <div className="relative w-11 h-11 rounded-xl bg-indigo-50 flex items-center justify-center ring-1 ring-indigo-100">
+                <Icon className="w-5 h-5 text-indigo-600" />
               </div>
-            </div>
-            {/* App UI Mockup */}
-            <div className="p-6 bg-slate-50 flex gap-6 text-left h-[400px] md:h-[500px]">
-              {/* Sidebar */}
-              <div className="hidden md:flex flex-col w-48 gap-4 border-r border-slate-200 pr-6">
-                <div className="h-8 w-24 bg-indigo-100 rounded mb-4" />
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className={`h-4 rounded w-full ${i === 1 ? 'bg-indigo-600' : 'bg-slate-200'}`} />
-                ))}
-              </div>
-              {/* Main Content */}
-              <div className="flex-1 flex flex-col gap-6">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="h-6 w-48 bg-slate-800 rounded mb-2" />
-                    <div className="h-4 w-32 bg-slate-400 rounded" />
-                  </div>
-                  <div className="h-10 w-32 bg-indigo-600 rounded-lg" />
-                </div>
-                {/* Stats Row */}
-                <div className="grid grid-cols-3 gap-4">
-                  {[Users, BarChart, CheckCircle2].map((Icon, i) => (
-                    <div key={i} className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center">
-                        <Icon className="w-5 h-5 text-indigo-600" />
-                      </div>
-                      <div>
-                        <div className="h-3 w-12 bg-slate-300 rounded mb-2" />
-                        <div className="h-5 w-16 bg-slate-800 rounded" />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                {/* Content Area */}
-                <div className="flex-1 bg-white rounded-xl border border-slate-100 shadow-sm p-6">
-                  <div className="h-5 w-40 bg-slate-800 rounded mb-6" />
-                  <div className="space-y-4">
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className="flex items-center justify-between p-4 rounded-lg border border-slate-50 bg-slate-50/50">
-                        <div className="flex items-center gap-4">
-                          <div className="w-8 h-8 rounded-full bg-slate-200" />
-                          <div className="h-4 w-32 bg-slate-600 rounded" />
-                        </div>
-                        <div className="h-6 w-20 bg-emerald-100 rounded-full" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              <p className="relative text-sm md:text-base text-slate-700 font-medium leading-relaxed max-w-sm">
+                {text}
+              </p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

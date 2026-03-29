@@ -24,6 +24,28 @@ const steps = [
   }
 ];
 
+const flowGridVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.32,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+const stepVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.88,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 export default function HowItWorks() {
   return (
     <section id="how-it-works" className="py-24 bg-white relative overflow-hidden">
@@ -39,14 +61,17 @@ export default function HowItWorks() {
           {/* Connecting Line */}
           <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -translate-y-1/2 z-0" />
           
-          <div className="grid md:grid-cols-4 gap-8 relative z-10">
+          <motion.div
+            className="grid md:grid-cols-4 gap-8 relative z-10"
+            variants={flowGridVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px 0px' }}
+          >
             {steps.map((step, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
+                variants={stepVariants}
                 className="relative bg-white pt-8 md:pt-0"
               >
                 <div className="w-16 h-16 mx-auto bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl border-4 border-white shadow-lg mb-6">
@@ -58,7 +83,7 @@ export default function HowItWorks() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

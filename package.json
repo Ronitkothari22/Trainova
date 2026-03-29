@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently -k \"vite\" \"node server/index.js\"",
+    "dev:client": "vite",
+    "server": "node server/index.js",
     "build": "vite build",
     "lint": "eslint .",
     "lint:dualite": "eslint --config eslint.dualite.config.js .",
@@ -13,12 +15,17 @@
   },
   "dependencies": {
     "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemailer": "^6.9.16",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.7.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "@eslint/js": "^9.27.0",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
