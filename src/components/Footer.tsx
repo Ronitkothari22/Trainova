@@ -1,5 +1,4 @@
-import React from 'react';
-import { BookOpen, Globe, Mail, MessageSquare } from 'lucide-react';
+import { Globe, Mail, MessageSquare } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -7,11 +6,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2 lg:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded-lg bg-indigo-500 flex items-center justify-center">
-                <BookOpen className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-white tracking-tight">Trainova</span>
+            <div className="flex items-center mb-6">
+              <span className="text-2xl font-bold text-white tracking-tight">Trainova</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs mb-6">
               A session-driven corporate LMS that blends structured learning with real-time engagement.
@@ -22,7 +18,7 @@ export default function Footer() {
               <a href="#" className="text-slate-400 hover:text-white transition-colors"><Mail className="w-5 h-5" /></a>
             </div>
           </div>
-          
+
           <div>
             <h4 className="text-white font-semibold mb-4">Product</h4>
             <ul className="space-y-3 text-sm">
@@ -53,7 +49,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        
+
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
           <p>© 2025 Trainova Inc. All rights reserved.</p>
           <div className="flex gap-6">
