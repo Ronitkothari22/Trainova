@@ -38,6 +38,12 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
+            <a
+              href="https://lms-frontend-three-pi.vercel.app/login"
+              className="text-sm font-medium text-slate-700 hover:text-indigo-600 transition-colors"
+            >
+              Sign In
+            </a>
             <button
               onClick={onBookDemo}
               className="text-sm font-medium bg-indigo-600 text-white px-5 py-2.5 rounded-full hover:bg-indigo-700 transition-colors shadow-sm hover:shadow-md"
@@ -63,6 +69,13 @@ export default function Navbar({ onBookDemo }: NavbarProps) {
           <a href="#demo" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-medium text-slate-600">Demo</a>
           <a href="#pricing" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-medium text-slate-600">Pricing</a>
           <hr className="border-slate-100" />
+          <a
+            href="https://lms-frontend-three-pi.vercel.app/login"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-base font-medium text-slate-700"
+          >
+            Sign In
+          </a>
           <button
             onClick={() => { setIsMobileMenuOpen(false); onBookDemo(); }}
             className="text-base font-medium bg-indigo-600 text-white px-5 py-3 rounded-lg text-center"
